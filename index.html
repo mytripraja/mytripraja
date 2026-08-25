@@ -20,12 +20,21 @@
     color:var(--text);
     font-family:'Segoe UI',Arial,Helvetica,sans-serif;
     overflow:hidden;
+    perspective:1400px;
   }
-  #stars{
+  #scene{
     position:fixed;
     inset:0;
     z-index:0;
     pointer-events:none;
+    transform-style:preserve-3d;
+    transition:transform .3s ease-out;
+    will-change:transform;
+  }
+  #stars{
+    position:absolute;
+    inset:0;
+    transform-style:preserve-3d;
   }
   .star{
     position:absolute;
@@ -39,32 +48,34 @@
     50%{opacity:1;}
   }
   .haze-left, .haze-right{
-    position:fixed;
+    position:absolute;
     top:0;
     bottom:0;
     width:55vw;
-    z-index:0;
-    pointer-events:none;
     filter:blur(60px);
     opacity:.55;
   }
   .haze-left{
     left:0;
     background:radial-gradient(circle at 20% 55%, rgba(139,63,240,.55), transparent 60%);
-    animation:driftLeft 10s ease-in-out infinite;
+    animation:driftLeft 9s ease-in-out infinite;
   }
   .haze-right{
     right:0;
     background:radial-gradient(circle at 80% 55%, rgba(47,91,255,.55), transparent 60%);
-    animation:driftRight 12s ease-in-out infinite;
+    animation:driftRight 11s ease-in-out infinite;
   }
   @keyframes driftLeft{
-    0%,100%{ transform:translate(0,0) scale(1); opacity:.5; }
-    50%{ transform:translate(4vw,-3vh) scale(1.15); opacity:.7; }
+    0%{ transform:translate3d(0,0,0) rotate3d(1,1,0,0deg) scale(1); opacity:.5; }
+    33%{ transform:translate3d(5vw,-4vh,120px) rotate3d(1,1,0,20deg) scale(1.2); opacity:.7; }
+    66%{ transform:translate3d(-2vw,3vh,-80px) rotate3d(1,1,0,-15deg) scale(.95); opacity:.6; }
+    100%{ transform:translate3d(0,0,0) rotate3d(1,1,0,0deg) scale(1); opacity:.5; }
   }
   @keyframes driftRight{
-    0%,100%{ transform:translate(0,0) scale(1); opacity:.5; }
-    50%{ transform:translate(-4vw,3vh) scale(1.15); opacity:.7; }
+    0%{ transform:translate3d(0,0,0) rotate3d(1,-1,0,0deg) scale(1); opacity:.5; }
+    33%{ transform:translate3d(-5vw,4vh,100px) rotate3d(1,-1,0,-20deg) scale(1.2); opacity:.7; }
+    66%{ transform:translate3d(3vw,-3vh,-90px) rotate3d(1,-1,0,15deg) scale(.95); opacity:.6; }
+    100%{ transform:translate3d(0,0,0) rotate3d(1,-1,0,0deg) scale(1); opacity:.5; }
   }
   .beam{
     position:fixed;
@@ -77,37 +88,54 @@
     z-index:1;
     pointer-events:none;
     animation:beamPulse 4s ease-in-out infinite;
+    transform-style:preserve-3d;
   }
   @keyframes beamPulse{
-    0%,100%{ opacity:.7; filter:blur(0px); }
-    50%{ opacity:1; filter:blur(0.5px); }
+    0%,100%{ opacity:.7; filter:blur(0px); transform:scaleX(1) translateZ(0); }
+    50%{ opacity:1; filter:blur(0.5px); transform:scaleX(1.03) translateZ(40px); }
   }
   .drift-orb{
-    position:fixed;
+    position:absolute;
     border-radius:50%;
-    z-index:0;
-    pointer-events:none;
     filter:blur(50px);
   }
   .orb1{
     width:30vw; height:30vw;
     top:-5vh; left:35vw;
     background:radial-gradient(circle, rgba(139,63,240,.35), transparent 65%);
-    animation:orbFloat1 14s ease-in-out infinite;
+    animation:orbFloat1 13s ease-in-out infinite;
   }
   .orb2{
     width:25vw; height:25vw;
     bottom:-5vh; right:20vw;
     background:radial-gradient(circle, rgba(47,91,255,.3), transparent 65%);
-    animation:orbFloat2 16s ease-in-out infinite;
+    animation:orbFloat2 15s ease-in-out infinite;
+  }
+  .orb3{
+    width:20vw; height:20vw;
+    top:30vh; left:5vw;
+    background:radial-gradient(circle, rgba(150,90,255,.25), transparent 65%);
+    animation:orbFloat3 17s ease-in-out infinite;
   }
   @keyframes orbFloat1{
-    0%,100%{ transform:translate(0,0); }
-    50%{ transform:translate(-3vw,4vh); }
+    0%{ transform:translate3d(0,0,0) scale(1); }
+    25%{ transform:translate3d(-4vw,5vh,150px) scale(1.25); }
+    50%{ transform:translate3d(3vw,8vh,-100px) scale(.9); }
+    75%{ transform:translate3d(-3vw,2vh,80px) scale(1.1); }
+    100%{ transform:translate3d(0,0,0) scale(1); }
   }
   @keyframes orbFloat2{
-    0%,100%{ transform:translate(0,0); }
-    50%{ transform:translate(3vw,-4vh); }
+    0%{ transform:translate3d(0,0,0) scale(1); }
+    25%{ transform:translate3d(4vw,-6vh,-120px) scale(1.15); }
+    50%{ transform:translate3d(-3vw,-3vh,100px) scale(.85); }
+    75%{ transform:translate3d(2vw,-8vh,-60px) scale(1.2); }
+    100%{ transform:translate3d(0,0,0) scale(1); }
+  }
+  @keyframes orbFloat3{
+    0%{ transform:translate3d(0,0,0) scale(1); }
+    30%{ transform:translate3d(5vw,4vh,90px) scale(1.2); }
+    60%{ transform:translate3d(-4vw,-5vh,-110px) scale(.9); }
+    100%{ transform:translate3d(0,0,0) scale(1); }
   }
 
   .page{
@@ -196,12 +224,15 @@
     justify-content:center;
     flex-shrink:1;
     margin:clamp(6px,1vh,14px) 0;
+    perspective:900px;
   }
   .ring{
     position:absolute;
     border-radius:50%;
     background:conic-gradient(from 200deg, var(--purple), var(--blue), var(--purple));
     filter:drop-shadow(0 0 14px rgba(120,90,255,.55));
+    transform-style:preserve-3d;
+    animation:ringSpin 16s linear infinite;
   }
   .ring::after{
     content:"";
@@ -210,9 +241,14 @@
     border-radius:50%;
     background:#000;
   }
-  .ring.r1{inset:0;}
-  .ring.r2{inset:5%;opacity:.85;}
-  .ring.r3{inset:10%;opacity:.6;}
+  .ring.r1{inset:0; animation-duration:18s;}
+  .ring.r2{inset:5%;opacity:.85; animation-duration:13s; animation-direction:reverse;}
+  .ring.r3{inset:10%;opacity:.6; animation-duration:10s;}
+  @keyframes ringSpin{
+    0%{ transform:rotate3d(1,1,0,0deg) rotateZ(0deg); }
+    50%{ transform:rotate3d(1,1,0,18deg) rotateZ(180deg); }
+    100%{ transform:rotate3d(1,1,0,0deg) rotateZ(360deg); }
+  }
 
   .ring-core{
     position:relative;
@@ -345,12 +381,15 @@
 </head>
 <body>
 
-<div id="stars"></div>
-<div class="haze-left"></div>
-<div class="haze-right"></div>
-<div class="drift-orb orb1"></div>
-<div class="drift-orb orb2"></div>
-<div class="beam"></div>
+<div id="scene">
+  <div id="stars"></div>
+  <div class="haze-left"></div>
+  <div class="haze-right"></div>
+  <div class="drift-orb orb1"></div>
+  <div class="drift-orb orb2"></div>
+  <div class="drift-orb orb3"></div>
+  <div class="beam"></div>
+</div>
 
 <div class="page">
   <header>
@@ -413,21 +452,63 @@ const TARGET_DATE = new Date("2028-02-11T16:15:00+05:30");
 const SUBSCRIBE_API_URL = "https://your-backend.onrender.com/api/coming-soon/subscribe";
 /* --------------------------------------------------------- */
 
-// Starfield generation
+// Starfield generation (with 3D depth)
 (function generateStars(){
   const container = document.getElementById('stars');
   const count = 140;
   for(let i=0;i<count;i++){
     const s = document.createElement('div');
     s.className = 'star';
-    const size = Math.random()*2 + 1;
+    const depth = Math.random(); // 0 = far, 1 = near
+    const size = depth*2.4 + 0.8;
     s.style.width = size+'px';
     s.style.height = size+'px';
     s.style.top = Math.random()*100+'vh';
     s.style.left = Math.random()*100+'vw';
     s.style.opacity = (Math.random()*0.7+0.3).toFixed(2);
+    s.style.transform = `translateZ(${(depth*300 - 150).toFixed(0)}px)`;
+    s.style.animationDelay = (Math.random()*3).toFixed(2)+'s';
+    s.dataset.depth = depth.toFixed(2);
     container.appendChild(s);
   }
+})();
+
+// 3D parallax: scene tilts toward pointer / device tilt
+(function initParallax(){
+  const scene = document.getElementById('scene');
+  let targetX = 0, targetY = 0, curX = 0, curY = 0;
+
+  function apply(){
+    curX += (targetX - curX) * 0.06;
+    curY += (targetY - curY) * 0.06;
+    scene.style.transform = `rotateX(${curY}deg) rotateY(${curX}deg) translateZ(0)`;
+    requestAnimationFrame(apply);
+  }
+  requestAnimationFrame(apply);
+
+  window.addEventListener('mousemove', (e) => {
+    const nx = (e.clientX / window.innerWidth) - 0.5;
+    const ny = (e.clientY / window.innerHeight) - 0.5;
+    targetX = nx * 14;   // rotateY range
+    targetY = -ny * 10;  // rotateX range
+  });
+
+  window.addEventListener('touchmove', (e) => {
+    if(!e.touches || !e.touches[0]) return;
+    const t = e.touches[0];
+    const nx = (t.clientX / window.innerWidth) - 0.5;
+    const ny = (t.clientY / window.innerHeight) - 0.5;
+    targetX = nx * 14;
+    targetY = -ny * 10;
+  }, { passive:true });
+
+  window.addEventListener('deviceorientation', (e) => {
+    if(e.gamma == null || e.beta == null) return;
+    targetX = Math.max(-16, Math.min(16, e.gamma / 3));
+    targetY = Math.max(-12, Math.min(12, (e.beta - 45) / 4));
+  });
+
+  window.addEventListener('mouseleave', () => { targetX = 0; targetY = 0; });
 })();
 
 // Countdown logic
