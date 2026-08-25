@@ -209,7 +209,7 @@
     flex-shrink:0;
   }
   .brand{
-    font-size:22px;
+    font-size:clamp(18px,2.4vh,26px);
     font-weight:700;
     letter-spacing:.5px;
   }
@@ -241,16 +241,16 @@
   }
 
   .eyebrow{
-    letter-spacing:4px;
-    font-size:clamp(10px,1.3vh,13px);
+    letter-spacing:5px;
+    font-size:clamp(12px,1.6vh,16px);
     color:var(--muted);
     text-transform:uppercase;
     margin-top:clamp(8px,1.5vh,20px);
-    margin-bottom:clamp(6px,1.2vh,14px);
+    margin-bottom:clamp(8px,1.6vh,18px);
     flex-shrink:0;
   }
   h1{
-    font-size:clamp(20px, 3.6vh, 46px);
+    font-size:clamp(26px, 5.4vh, 62px);
     text-align:center;
     font-weight:800;
     margin-bottom:0;
@@ -266,7 +266,7 @@
 
   .ring-wrap{
     position:relative;
-    width:min(46vh, 90vw, 480px);
+    width:min(56vh, 92vw, 580px);
     aspect-ratio:1/1;
     display:flex;
     align-items:center;
@@ -311,18 +311,18 @@
     align-items:center;
     justify-content:center;
     text-align:center;
-    gap:clamp(6px,1.2vh,14px);
+    gap:clamp(8px,1.6vh,18px);
     padding:clamp(10px,2vh,20px);
   }
   .coming-in{
-    letter-spacing:3px;
-    font-size:clamp(9px,1.1vh,12px);
+    letter-spacing:3.5px;
+    font-size:clamp(11px,1.4vh,15px);
     color:var(--muted);
     text-transform:uppercase;
   }
   .countdown{
     display:flex;
-    gap:clamp(6px,1.4vh,14px);
+    gap:clamp(8px,1.8vh,18px);
     align-items:flex-start;
   }
   .countdown .unit{
@@ -331,27 +331,28 @@
     align-items:center;
   }
   .countdown .num{
-    font-size:clamp(18px, 4.2vh, 40px);
+    font-size:clamp(26px, 6.6vh, 58px);
     font-weight:800;
     font-variant-numeric:tabular-nums;
     line-height:1;
+    text-shadow:0 0 18px rgba(150,120,255,.5);
   }
   .countdown .lbl{
-    font-size:clamp(8px,0.9vh,10px);
-    letter-spacing:1.5px;
+    font-size:clamp(9px,1.05vh,12px);
+    letter-spacing:2px;
     color:var(--muted);
-    margin-top:6px;
+    margin-top:8px;
     text-transform:uppercase;
   }
   .countdown .colon{
-    font-size:clamp(16px, 3.6vh, 34px);
+    font-size:clamp(22px, 5.6vh, 48px);
     font-weight:700;
     color:var(--muted);
     padding-top:2px;
   }
   .target-date{
-    letter-spacing:3px;
-    font-size:clamp(9px,1.1vh,12px);
+    letter-spacing:3.5px;
+    font-size:clamp(11px,1.4vh,15px);
     color:var(--muted);
   }
 
@@ -383,17 +384,17 @@
     border:none;
     outline:none;
     color:#fff;
-    font-size:clamp(12px,1.6vh,15px);
-    padding:clamp(6px,1.3vh,10px) 0;
+    font-size:clamp(13px,1.9vh,17px);
+    padding:clamp(7px,1.5vh,12px) 0;
   }
   form input::placeholder{color:#8a8a95;}
   form button{
     border:none;
     cursor:pointer;
-    padding:clamp(9px,1.6vh,13px) clamp(16px,2.4vw,26px);
+    padding:clamp(10px,1.9vh,15px) clamp(18px,2.6vw,30px);
     border-radius:30px;
     font-weight:700;
-    font-size:clamp(11px,1.3vh,13px);
+    font-size:clamp(12px,1.5vh,14px);
     letter-spacing:.5px;
     color:#fff;
     background:linear-gradient(90deg,var(--purple),var(--blue));
