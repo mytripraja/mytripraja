@@ -127,10 +127,10 @@ h1 .grad {
 
 .ring-container {
   position: relative;
-  width: min(55vh, 85vw, 560px);
+  width: min(85vw, 560px);
   aspect-ratio: 1;
-  flex-shrink: 1;
-  min-height: 0;
+  flex-shrink: 0; /* Stops the vertical squishing */
+  margin: 0 auto;
 }
 
 /* Massive soft outer glow */
