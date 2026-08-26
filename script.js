@@ -154,6 +154,19 @@ const SUBSCRIBE_API_URL = "https://your-backend.onrender.com/api/coming-soon/sub
     ctx.arc(lFlareX, lFlareY, W * 0.15, 0, Math.PI * 2);
     ctx.fill();
 
+    // Left purple flare
+    const lFlareX = W * 0.22;
+    const lFlareY = beamY - H * 0.05;
+    const lp = 0.4 + 0.5 * Math.sin(t * 0.6);
+    const lGrad = ctx.createRadialGradient(lFlareX, lFlareY, 0, lFlareX, lFlareY, W * 0.15);
+    lGrad.addColorStop(0, `rgba(160,100,255,${0.2 * lp})`);
+    lGrad.addColorStop(0.3, `rgba(120,60,220,${0.08 * lp})`);
+    lGrad.addColorStop(1, 'transparent');
+    ctx.fillStyle = lGrad;
+    ctx.beginPath();
+    ctx.arc(lFlareX, lFlareY, W * 0.15, 0, Math.PI * 2);
+    ctx.fill();
+
     // Traveling spark
     const sparkX1 = (((t * 0.12) % 1.4) - 0.2) * W;
     if(sparkX1 > 0 && sparkX1 < W){
