@@ -2,367 +2,73 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MyTripRaja — Launching Soon</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-
-  :root {
-    --bg: #05010f;
-    --neon-blue: #0075ff;
-    --neon-purple: #8a2be2;
-    --text-main: #ffffff;
-    --text-muted: #8b8b9c;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    background-color: var(--bg);
-    /* A subtle space-like radial gradient background */
-    background-image: radial-gradient(circle at 20% 30%, rgba(138, 43, 226, 0.15) 0%, transparent 40%),
-                      radial-gradient(circle at 80% 60%, rgba(0, 117, 255, 0.1) 0%, transparent 40%);
-    color: var(--text-main);
-    font-family: 'Inter', sans-serif;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
-
-  /* ===== HEADER ===== */
-  header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 30px 50px;
-    position: relative;
-    z-index: 10;
-  }
-  .brand {
-    font-size: 24px;
-    font-weight: 800;
-  }
-  .brand span { color: #8b8b9c; font-weight: 500; }
-  
-  .social-icons { display: flex; gap: 20px; }
-  .social-icons a { color: #fff; opacity: 0.7; transition: opacity 0.3s; }
-  .social-icons a:hover { opacity: 1; }
-
-  /* ===== MAIN CONTAINER ===== */
-  .main-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-  }
-
-  /* ===== HERO TEXT ===== */
-  .hero-text {
-    text-align: center;
-    margin-bottom: 20px;
-    z-index: 10;
-  }
-  .eyebrow {
-    font-size: 13px;
-    letter-spacing: 4px;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    margin-bottom: 15px;
-  }
-  h1 {
-    font-size: 48px;
-    font-weight: 700;
-  }
-  h1 .highlight {
-    background: linear-gradient(90deg, #c084fc, #60a5fa);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  /* ===== HORIZONTAL LIGHT BEAM ===== */
-  .light-beam-wrapper {
-    position: absolute;
-    top: 55%;
-    left: 0;
-    width: 100%;
-    transform: translateY(-50%);
-    z-index: 1;
-    pointer-events: none;
-  }
-  .beam-core {
-    height: 2px;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.8);
-    box-shadow: 
-      0 0 10px 2px #fff,
-      0 0 30px 8px var(--neon-purple),
-      0 0 80px 20px var(--neon-blue);
-  }
-
-  /* ===== COUNTDOWN TIMER SECTION ===== */
-  .timer-section {
-    position: relative;
-    width: 480px;
-    height: 480px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 5;
-    margin: 20px 0;
-  }
-
-  /* Glowing Rings */
-  .ring {
-    position: absolute;
-    border-radius: 50%;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  .ring-outer {
-    width: 420px; height: 420px;
-    border: 2px solid rgba(0, 117, 255, 0.5);
-    box-shadow: 
-      0 0 20px 2px rgba(0, 117, 255, 0.4),
-      inset 0 0 30px 5px rgba(0, 117, 255, 0.3),
-      0 0 80px 15px rgba(138, 43, 226, 0.4);
-  }
-  .ring-middle {
-    width: 360px; height: 360px;
-    border: 1.5px solid rgba(138, 43, 226, 0.6);
-    box-shadow: 
-      0 0 15px rgba(138, 43, 226, 0.5),
-      inset 0 0 20px rgba(138, 43, 226, 0.4);
-  }
-  .ring-inner {
-    width: 320px; height: 320px;
-    background: var(--bg); /* Masks the beam behind the text */
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.8);
-  }
-
-  /* Starburst Flares */
-  .flare {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 150px;
-    height: 30px;
-    background: radial-gradient(ellipse at center, rgba(255,255,255,1) 0%, rgba(0,117,255,0.5) 30%, transparent 70%);
-    z-index: 6;
-  }
-  .flare.left { left: -60px; }
-  .flare.right { right: -60px; }
-
-  /* Timer Content */
-  .timer-content {
-    position: relative;
-    z-index: 10;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-  }
-  .timer-label, .timer-date {
-    font-size: 11px;
-    letter-spacing: 3px;
-    color: var(--text-muted);
-    text-transform: uppercase;
-  }
-  
-  .countdown-row {
-    display: flex;
-    align-items: flex-start;
-    gap: 15px;
-  }
-  .time-box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-width: 50px;
-  }
-  .time-box .num {
-    font-size: 42px;
-    font-weight: 700;
-    line-height: 1;
-    color: #fff;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-  }
-  .time-box .unit {
-    font-size: 9px;
-    letter-spacing: 2px;
-    margin-top: 8px;
-    color: var(--text-muted);
-    text-transform: uppercase;
-  }
-  .colon {
-    font-size: 32px;
-    font-weight: 600;
-    color: var(--text-muted);
-    line-height: 1.1;
-  }
-
-  /* ===== EMAIL INPUT ===== */
-  .notify-container {
-    margin-top: 20px;
-    z-index: 10;
-  }
-  .email-form {
-    display: flex;
-    align-items: center;
-    background: rgba(10, 5, 25, 0.6);
-    border: 1px solid rgba(138, 43, 226, 0.5);
-    border-radius: 50px;
-    padding: 5px 5px 5px 25px;
-    width: 450px;
-    box-shadow: 0 0 20px rgba(138, 43, 226, 0.2);
-    backdrop-filter: blur(10px);
-  }
-  .email-form:focus-within {
-    border-color: rgba(138, 43, 226, 1);
-    box-shadow: 0 0 30px rgba(138, 43, 226, 0.4);
-  }
-  .email-form svg {
-    color: var(--text-muted);
-    margin-right: 15px;
-  }
-  .email-form input {
-    flex: 1;
-    background: transparent;
-    border: none;
-    outline: none;
-    color: #fff;
-    font-size: 14px;
-    font-family: inherit;
-  }
-  .email-form button {
-    background: linear-gradient(90deg, #8a2be2, #0075ff);
-    color: #fff;
-    border: none;
-    padding: 14px 30px;
-    border-radius: 50px;
-    font-weight: 600;
-    font-size: 12px;
-    letter-spacing: 1px;
-    cursor: pointer;
-    text-transform: uppercase;
-    transition: filter 0.3s;
-  }
-  .email-form button:hover { filter: brightness(1.2); }
-
-  @media (max-width: 768px) {
-    h1 { font-size: 32px; }
-    .timer-section { width: 320px; height: 320px; transform: scale(0.8); }
-    .email-form { width: 90vw; max-width: 400px; }
-    header { padding: 20px; }
-  }
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<div id="scene">
+  <div id="stars"></div>
+  <div class="haze-left"></div>
+  <div class="haze-right"></div>
+  <div class="drift-orb orb1"></div>
+  <div class="drift-orb orb2"></div>
+  <div class="drift-orb orb3"></div>
+  <div class="beam-glow"></div>
+  <div class="beam"></div>
+  <div class="beam-spark s1"></div>
+  <div class="beam-spark s2"></div>
+</div>
+
+<div class="page">
   <header>
     <div class="brand">My<span>Trip</span>Raja</div>
-    <div class="social-icons">
-      <!-- Standard clean white icons -->
-      <a href="#"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
-      <a href="#"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
-      <a href="#"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+    <div class="socials">
+      <a href="https://www.facebook.com/profile.php?id=61577792564324" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5 3.66 9.15 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.5 1.49-3.89 3.78-3.89 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.44 2.91h-2.34V22c4.78-.79 8.44-4.94 8.44-9.94Z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/mytripraja/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/company/mytripraja/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm7 0h3.8v1.7h.05c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.78 2.53 4.78 5.83V21h-4v-5.6c0-1.34-.02-3.06-1.87-3.06-1.87 0-2.16 1.44-2.16 2.96V21h-4V9Z"/></svg>
+      </a>
     </div>
   </header>
 
-  <div class="main-content">
-    
-    <div class="hero-text">
-      <div class="eyebrow">We're crafting something extraordinary</div>
-      <h1>New experience <span class="highlight">launching soon</span></h1>
-    </div>
+  <div class="eyebrow">We're crafting something extraordinary</div>
+  <h1>New experience <span class="grad">launching soon</span></h1>
 
-    <!-- The continuous light beam sitting behind the rings -->
-    <div class="light-beam-wrapper">
-      <div class="beam-core"></div>
-    </div>
-
-    <!-- The Rings and Timer -->
-    <div class="timer-section">
-      <div class="ring ring-outer"></div>
-      <div class="ring ring-middle"></div>
-      <div class="ring ring-inner"></div>
-      
-      <!-- Precision left/right flares -->
-      <div class="flare left"></div>
-      <div class="flare right"></div>
-
-      <div class="timer-content">
-        <div class="timer-label">Coming in</div>
-        
-        <div class="countdown-row">
-          <div class="time-box">
-            <div class="num" id="d">000</div>
-            <div class="unit">Days</div>
-          </div>
-          <div class="colon">:</div>
-          <div class="time-box">
-            <div class="num" id="h">00</div>
-            <div class="unit">Hours</div>
-          </div>
-          <div class="colon">:</div>
-          <div class="time-box">
-            <div class="num" id="m">00</div>
-            <div class="unit">Minutes</div>
-          </div>
-          <div class="colon">:</div>
-          <div class="time-box">
-            <div class="num" id="s">00</div>
-            <div class="unit">Seconds</div>
-          </div>
-        </div>
-
-        <div class="timer-date">11 FEB 2028</div>
+  <div class="ring-wrap">
+    <div class="ring r1"></div>
+    <div class="ring r2"></div>
+    <div class="ring r3"></div>
+    <div class="ring-core" id="ringCore">
+      <div class="coming-in">Coming in</div>
+      <div class="countdown" id="countdown">
+        <div class="unit"><div class="num" id="days">00</div><div class="lbl">Days</div></div>
+        <div class="colon">:</div>
+        <div class="unit"><div class="num" id="hours">00</div><div class="lbl">Hours</div></div>
+        <div class="colon">:</div>
+        <div class="unit"><div class="num" id="minutes">00</div><div class="lbl">Minutes</div></div>
+        <div class="colon">:</div>
+        <div class="unit"><div class="num" id="seconds">00</div><div class="lbl">Seconds</div></div>
       </div>
+      <div class="target-date">11 FEB 2028 · 4:15 PM IST</div>
     </div>
-
-    <!-- Email Subscription -->
-    <div class="notify-container">
-      <form class="email-form">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-        <input type="email" placeholder="Enter your email address" required>
-        <button type="submit">Notify Me</button>
-      </form>
-    </div>
-
   </div>
 
-  <script>
-    // Robust timer logic ensuring it counts correctly to Feb 11, 2028
-    const targetDate = new Date("2028-02-11T00:00:00").getTime();
+  <div class="form-wrap">
+    <form id="notifyForm" autocomplete="off">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 6 10 7L22 6"/></svg>
+      <input type="email" id="emailInput" placeholder="Enter your email address" required>
+      <button type="submit" id="notifyBtn">Notify Me</button>
+    </form>
+    <div class="status-msg" id="statusMsg"></div>
+  </div>
+</div>
 
-    function updateTimer() {
-      const now = new Date().getTime();
-      const distance = targetDate - now;
-
-      if (distance < 0) return; // Stop if the date has passed
-
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const secondsI see exactly what you mean. In `image_5b173c.jpg`, your countdown timer is stuck at all zeros (`000 : 00 : 00 : 00`), even though the launch date right below it clearly says **11 FEB 2028**. 
-
-Since I can see you have a tab open for your `script.js` file, the bug is almost certainly happening in your JavaScript calculation. Here are the most common reasons a countdown timer zeroes out prematurely and how to fix them:
-
-### 1. Invalid Date Format
-If JavaScript can't parse the target date string, it will result in an invalid date, which often breaks the math and defaults the timer to zero. 
-*   **The Fix:** Make sure you are using the ISO 8601 format for your target date, as it is the most widely supported across all browsers. 
-*   **Example:** Change `new Date("11 Feb 2028").getTime()` or `new Date("11-02-2028").getTime()` to `new Date("2028-02-11T00:00:00").getTime()`.
-
-### 2. Math or Logic Error
-Countdown timers work by finding the difference (distance) between the target date and `new Date().getTime()`. If the distance evaluates to a negative number or `NaN` (Not a Number), the standard fallback is to display zeros.
-*   **The Fix:** Add a quick `console.log(distance);` inside your timer interval function. If it prints `NaN`, you definitely have a date parsing issue. If it prints a negative number, your target date variable is somehow set in the past.
-
-### 3. DOM Element Mismatch
-If your script is calculating the time perfectly but targeting the wrong HTML IDs or classes, the front-end will just display the hardcoded `000` from your HTML file.
-*   **The Fix:** Double-check that `document.getElementById("days")` (or whatever selector you are using) perfectly matches the IDs in your HTML.
-
-If you want to paste the code snippet from your `script.js` file where you define the target date and calculate the distance, I can tell you exactly which line is breaking!
+<script src="script.js"></script>
+</body>
+</html>
