@@ -254,6 +254,7 @@
     color:transparent;
   }
 
+  /* Enhanced 3D Splashed Light & Glow Rings */
   .ring-wrap{
     position:relative;
     width:min(56vh, 92vw, 580px);
@@ -263,32 +264,44 @@
     justify-content:center;
     flex-shrink:1;
     margin:clamp(6px,1vh,14px) 0;
-    perspective:900px;
+    perspective:1000px;
   }
+
   .ring{
     position:absolute;
     border-radius:50%;
-    background:conic-gradient(from 200deg, var(--purple), var(--blue), var(--purple));
-    filter:drop-shadow(0 0 28px rgba(139,63,240,.9)) drop-shadow(0 0 55px rgba(47,91,255,.7)) drop-shadow(0 0 90px rgba(120,90,255,.45));
+    background:conic-gradient(from 180deg at 50% 50%, var(--purple) 0deg, var(--blue) 120deg, rgba(255,255,255,0.8) 180deg, var(--purple) 300deg, var(--blue) 360deg);
+    /* 3D multi-layered splash glow */
+    filter:drop-shadow(0 0 20px rgba(139,63,240,0.8)) 
+           drop-shadow(0 0 40px rgba(47,91,255,0.6)) 
+           drop-shadow(0 0 80px rgba(120,90,255,0.4));
     transform-style:preserve-3d;
-    animation:ringSpin 16s linear infinite;
+    animation:ringSpin 14s linear infinite;
   }
+
   .ring::after{
     content:"";
     position:absolute;
-    inset:1.5px;
+    inset:2px;
     border-radius:50%;
     background:#000;
   }
-  .ring.r1{inset:0; animation-duration:18s;}
-  .ring.r2{inset:5%;opacity:.85; animation-duration:13s; animation-direction:reverse;}
-  .ring.r3{inset:10%;opacity:.6; animation-duration:10s;}
+
+  /* Ring sizing and depth layering */
+  .ring.r1{ inset:0; animation-duration:20s; opacity:0.9; }
+  .ring.r2{ inset:6%; opacity:0.75; animation-duration:12s; animation-direction:reverse; }
+  .ring.r3{ inset:12%; opacity:0.5; animation-duration:8s; }
+
   @keyframes ringSpin{
-    0%{ transform:rotate3d(1,1,0,0deg) rotateZ(0deg); }
-    50%{ transform:rotate3d(1,1,0,18deg) rotateZ(180deg); }
-    100%{ transform:rotate3d(1,1,0,0deg) rotateZ(360deg); }
+    0%{ transform:rotate3d(0.5, 1, 0.2, 0deg) rotateZ(0deg); }
+    50%{ transform:rotate3d(0.5, 1, 0.2, 25deg) rotateZ(180deg); }
+    100%{ transform:rotate3d(0.5, 1, 0.2, 0deg) rotateZ(360deg); }
   }
 
+  /* Splashed light beam intersection overlay */
+  .beam {
+    box-shadow: 0 0 35px 8px rgba(139,63,240,0.7), 0 0 70px 20px rgba(47,91,255,0.4);
+  }
   .ring-core{
     position:relative;
     z-index:3;
