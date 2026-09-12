@@ -92,3 +92,14 @@
     left:calc(50% + min(430px,84vw,52vh)/2 - 30px);
   }
 }
+
+/* The boundary flare itself belongs to the circle, so it remains
+   perfectly aligned when the circle changes size. */
+.side-flare{
+  isolation:isolate;
+}
+.side-flare-left,
+.side-flare-right{
+  --flare-core:rgba(255,255,255,.95);
+}
+.side-flare::marker{display:none}

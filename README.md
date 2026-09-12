@@ -77,3 +77,10 @@ https://www.linkedin.com/company/mytripraja/
 Open `index.html` locally to preview the visual design.
 
 Email storage requires PHP + MySQL hosting. A local `file://` preview cannot execute `save_email.php`.
+
+
+## Beam / flare alignment
+
+The left and right white light points are now children of the countdown circle itself.
+Their position is anchored to the actual rendered circle boundary, so changing the
+circle size no longer leaves the white points detached from the ring.
