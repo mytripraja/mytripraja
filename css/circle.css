@@ -1,0 +1,94 @@
+/* =========================================================
+   COUNTDOWN CIRCLE COMPONENT
+   Edit only this file for circle/ring size and glow.
+   ========================================================= */
+.launch-circle{
+  position:relative;
+  z-index:5;
+  width:min(575px,60vh);
+  height:min(575px,60vh);
+  min-width:455px;
+  min-height:455px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:#000;
+  box-shadow:
+    0 0 24px rgba(111,0,255,.98),
+    0 0 55px rgba(55,0,255,.44),
+    inset 0 0 32px rgba(55,0,255,.18);
+  animation:circleBreath 4.5s ease-in-out infinite alternate;
+}
+
+.launch-circle:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  border:2px solid transparent;
+  background:
+    linear-gradient(110deg,#d000ff,#7138ff 37%,#008cff 73%,#6500ff)
+    border-box;
+  -webkit-mask:
+    linear-gradient(#000 0 0) padding-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+  mask-composite:exclude;
+  filter:drop-shadow(0 0 8px #7800ff);
+}
+
+.circle-ring{
+  position:absolute;
+  border-radius:50%;
+  border:1px solid rgba(89,55,255,.92);
+  box-shadow:0 0 8px rgba(57,57,255,.7);
+}
+
+.ring-one{inset:13px}
+.ring-two{inset:40px}
+.ring-three{inset:74px}
+.ring-four{
+  inset:101px;
+  border:2px solid #6250ff;
+  box-shadow:0 0 13px #3f51ff;
+}
+
+.circle-content{
+  position:relative;
+  z-index:10;
+  width:100%;
+  text-align:center;
+}
+
+@keyframes circleBreath{
+  to{
+    transform:scale(1.008);
+    filter:brightness(1.13);
+  }
+}
+
+@media(max-height:760px) and (min-width:701px){
+  .launch-circle{
+    width:min(500px,59vh);
+    height:min(500px,59vh);
+    min-width:420px;
+    min-height:420px;
+  }
+  .left-flare{left:calc(50% - 250px - 31px)}
+  .right-flare{left:calc(50% + 250px - 31px)}
+}
+
+@media(max-width:700px){
+  .launch-circle{
+    width:min(430px,84vw,52vh);
+    height:min(430px,84vw,52vh);
+    min-width:0;
+    min-height:0;
+  }
+  .left-flare{
+    left:calc(50% - min(430px,84vw,52vh)/2 - 30px);
+  }
+  .right-flare{
+    left:calc(50% + min(430px,84vw,52vh)/2 - 30px);
+  }
+}

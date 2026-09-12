@@ -1,0 +1,246 @@
+/* =========================================================
+   PAGE / HEADER / EMAIL LAYOUT
+   Components above can be tuned independently.
+   ========================================================= */
+*{box-sizing:border-box}
+
+html,body{
+  width:100%;
+  height:100%;
+  margin:0;
+  overflow:hidden;
+}
+
+body{
+  background:#000;
+  color:#fff;
+  font-family:Arial,Helvetica,sans-serif;
+}
+
+.page{
+  position:relative;
+  z-index:2;
+  width:100%;
+  height:100vh;
+  padding:31px 32px 25px;
+  display:flex;
+  flex-direction:column;
+}
+
+header{
+  height:38px;
+  flex:none;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.brand{
+  font-size:25px;
+  font-weight:500;
+  letter-spacing:-1px;
+}
+
+.socials{
+  display:flex;
+  gap:28px;
+  align-items:center;
+}
+
+.socials a{
+  color:#fff;
+  text-decoration:none;
+  display:grid;
+  place-items:center;
+  transition:.2s;
+}
+
+.socials a:hover{
+  color:#a65cff;
+  transform:scale(1.08);
+}
+
+.socials svg{
+  width:22px;
+  height:22px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.9;
+}
+
+.socials .facebook{
+  fill:currentColor;
+  stroke:none;
+}
+
+.linkedin{
+  font-size:21px;
+  font-weight:700;
+  letter-spacing:-1px;
+}
+
+main{
+  width:min(1210px,100%);
+  height:calc(100vh - 63px);
+  margin:auto;
+  display:grid;
+  grid-template-rows:auto minmax(0,1fr) auto;
+  text-align:center;
+}
+
+.heading{
+  padding-top:5.6vh;
+  position:relative;
+  z-index:10;
+}
+
+.eyebrow{
+  font-size:18px;
+  letter-spacing:8px;
+  margin-bottom:27px;
+  color:#eee;
+}
+
+h1{
+  font-size:clamp(42px,4.55vw,69px);
+  line-height:1.04;
+  letter-spacing:-3px;
+  margin:0;
+  font-weight:700;
+  white-space:nowrap;
+}
+
+h1 span{
+  background:linear-gradient(90deg,#8500ff,#5634ff,#087dff);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+.hero{
+  position:relative;
+  min-height:0;
+  display:grid;
+  place-items:center;
+}
+
+.notify-form{
+  width:min(730px,92vw);
+  height:80px;
+  margin:0 auto;
+  position:relative;
+  z-index:12;
+  border:1px solid #a13cff;
+  border-radius:50px;
+  padding:8px 10px 8px 37px;
+  display:flex;
+  align-items:center;
+  background:rgba(0,0,0,.72);
+  box-shadow:
+    0 0 20px rgba(116,0,255,.25),
+    inset 0 0 15px rgba(88,0,255,.08);
+}
+
+.mail-icon{
+  width:31px;
+  height:22px;
+  border:1.7px solid #fff;
+  border-radius:3px;
+  position:relative;
+  flex:none;
+  margin-right:28px;
+}
+
+.mail-icon:before,
+.mail-icon:after{
+  content:"";
+  position:absolute;
+  top:2px;
+  width:19px;
+  height:1.5px;
+  background:#fff;
+}
+
+.mail-icon:before{
+  left:0;
+  transform:rotate(31deg);
+  transform-origin:left;
+}
+
+.mail-icon:after{
+  right:0;
+  transform:rotate(-31deg);
+  transform-origin:right;
+}
+
+.notify-form input{
+  min-width:0;
+  flex:1;
+  background:transparent;
+  border:0;
+  outline:0;
+  color:#fff;
+  font-size:18px;
+}
+
+.notify-form input::placeholder{color:#ddd}
+
+.notify-form button{
+  height:58px;
+  min-width:210px;
+  border:0;
+  border-radius:32px;
+  background:linear-gradient(100deg,#7615ff,#174dff);
+  color:#fff;
+  font-size:17px;
+  font-weight:600;
+  cursor:pointer;
+  box-shadow:0 0 17px rgba(44,42,255,.45);
+}
+
+.notify-form button:hover{filter:brightness(1.15)}
+.notify-form button:disabled{opacity:.6}
+
+.form-message{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:-21px;
+  font-size:13px;
+}
+
+.form-message.ok{color:#91ffcb}
+.form-message.err{color:#ff8caa}
+
+@media(max-height:760px) and (min-width:701px){
+  .page{padding-top:22px;padding-bottom:18px}
+  header{height:31px}
+  main{height:calc(100vh - 49px)}
+  .heading{padding-top:3vh}
+  .eyebrow{font-size:14px;margin-bottom:15px}
+  h1{font-size:50px}
+  .notify-form{height:68px}
+  .notify-form button{height:50px}
+}
+
+@media(max-width:700px){
+  .page{padding:19px 14px 14px;min-height:520px}
+  header{height:30px}
+  .brand{font-size:21px}
+  .socials{gap:16px}
+  .socials svg{width:19px;height:19px}
+  .linkedin{font-size:18px}
+  main{height:calc(100vh - 44px)}
+  .heading{padding-top:4vh}
+  .eyebrow{font-size:9px;letter-spacing:4px;margin-bottom:14px}
+  h1{font-size:32px;letter-spacing:-1.4px}
+  .notify-form{
+    width:96vw;
+    height:61px;
+    padding:5px 6px 5px 16px;
+  }
+  .mail-icon{width:24px;height:18px;margin-right:11px}
+  .notify-form input{font-size:13px}
+  .notify-form button{height:49px;min-width:116px;font-size:12px}
+  .form-message{font-size:10px;bottom:-18px}
+}

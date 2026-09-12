@@ -1,0 +1,140 @@
+/* =========================================================
+   CENTER LIGHT / BEAM COMPONENT
+   Edit this file for the horizontal energy line and flares.
+   ========================================================= */
+.energy-beam{
+  position:absolute;
+  z-index:2;
+  left:calc((100vw - 100%)/-2);
+  right:calc((100vw - 100%)/-2);
+  top:50%;
+  height:2px;
+  transform:translateY(-50%);
+  background:
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      #4e00ff 14%,
+      #b600ff 28%,
+      #ffffff 44%,
+      #ffffff 51%,
+      #348dff 67%,
+      #006aff 84%,
+      transparent 100%
+    );
+  background-size:200% 100%;
+  box-shadow:0 0 14px 3px rgba(80,0,255,.9);
+  animation:beamColorFlow 4.2s linear infinite,
+            beamGlow 2.6s ease-in-out infinite alternate;
+}
+
+.energy-beam:before{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  top:-30px;
+  height:60px;
+  background:inherit;
+  filter:blur(18px);
+  opacity:.42;
+}
+
+.traveling-light{
+  position:absolute;
+  top:-2px;
+  left:-18%;
+  width:30%;
+  height:6px;
+  background:linear-gradient(
+    90deg,
+    transparent,
+    #bd00ff,
+    #ffffff,
+    #008cff,
+    transparent
+  );
+  filter:blur(1px);
+  animation:travel 3.2s linear infinite;
+}
+
+.left-flare,
+.right-flare{
+  position:absolute;
+  top:50%;
+  width:62px;
+  height:62px;
+  border-radius:50%;
+  transform:translateY(-50%);
+  pointer-events:none;
+}
+
+.left-flare{
+  left:calc(50% - 287px - 31px);
+}
+
+.right-flare{
+  left:calc(50% + 287px - 31px);
+}
+
+.left-flare:before,
+.right-flare:before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:17px;
+  height:17px;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  background:#fff;
+  box-shadow:
+    0 0 6px #fff,
+    0 0 17px #c900ff,
+    0 0 40px #9000ff,
+    0 0 72px rgba(120,0,255,.75);
+  animation:flarePulse 2.7s ease-in-out infinite;
+}
+
+.right-flare:before{
+  box-shadow:
+    0 0 6px #fff,
+    0 0 17px #57a8ff,
+    0 0 40px #0074ff,
+    0 0 72px rgba(0,100,255,.75);
+}
+
+.left-flare:after,
+.right-flare:after{
+  content:"";
+  position:absolute;
+  left:-20px;
+  right:-20px;
+  top:50%;
+  height:2px;
+  transform:translateY(-50%);
+  background:linear-gradient(90deg,transparent,#fff,transparent);
+  filter:blur(2px);
+}
+
+@keyframes beamColorFlow{
+  to{background-position:200% 0}
+}
+
+@keyframes beamGlow{
+  to{
+    opacity:.82;
+    box-shadow:0 0 25px 5px rgba(70,0,255,.95)
+  }
+}
+
+@keyframes travel{
+  0%{left:-20%;opacity:0}
+  15%{opacity:1}
+  58%{opacity:1}
+  100%{left:100%;opacity:0}
+}
+
+@keyframes flarePulse{
+  50%{transform:translate(-50%,-50%) scale(1.42);opacity:.9}
+}

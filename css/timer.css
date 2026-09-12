@@ -1,0 +1,78 @@
+/* =========================================================
+   TIMER COMPONENT
+   Edit only this file for timer typography/spacing.
+   ========================================================= */
+.coming{
+  font-size:16px;
+  letter-spacing:8px;
+  margin-bottom:34px;
+}
+
+.timer{
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+  gap:5px;
+  font-variant-numeric:tabular-nums;
+}
+
+.timer-unit{
+  width:78px;
+  min-width:78px;
+}
+
+.timer-unit strong{
+  display:block;
+  font-size:51px;
+  font-weight:300;
+  line-height:1;
+  letter-spacing:-2px;
+}
+
+.timer-unit small{
+  display:block;
+  font-size:12px;
+  margin-top:12px;
+  color:#eee;
+}
+
+.timer>b{
+  font-size:35px;
+  line-height:1.05;
+  font-weight:300;
+}
+
+.launch-date{
+  font-size:16px;
+  letter-spacing:8px;
+  margin-top:77px;
+}
+
+#liveMessage{
+  display:none;
+  font-size:clamp(35px,5vw,67px);
+  font-weight:700;
+  background:linear-gradient(90deg,#a400ff,#fff,#168bff);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+@media(max-height:760px) and (min-width:701px){
+  .coming{font-size:13px;margin-bottom:25px}
+  .timer-unit{width:67px;min-width:67px}
+  .timer-unit strong{font-size:43px}
+  .timer>b{font-size:31px}
+  .timer-unit small{font-size:10px;margin-top:10px}
+  .launch-date{font-size:13px;margin-top:51px}
+}
+
+@media(max-width:700px){
+  .coming{font-size:9px;letter-spacing:5px;margin-bottom:21px}
+  .timer{gap:1px}
+  .timer-unit{width:50px;min-width:50px}
+  .timer-unit strong{font-size:25px}
+  .timer>b{font-size:20px}
+  .timer-unit small{font-size:7px;margin-top:7px}
+  .launch-date{font-size:9px;letter-spacing:5px;margin-top:36px}
+}
